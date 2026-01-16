@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register</title>
+
+  <style>
+    :root{
+      --bg:#f5f6f7;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --accent:#2563eb;
+      --accent2:#0ea5e9;
+      --shadow: 0 8px 22px rgba(17,24,39,.08);
+      --radius:12px;
+      --font: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family:var(--font);
+      color:var(--text);
+      background:var(--bg);
+    }
+
+    .topbar{
+      background: var(--card);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:18px 16px;
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:220px;
+    }
+    .logo-img{
+      height:64px;
+      width:auto;
+      display:block;
+    }
+
+    .container{
+      max-width:1100px;
+      margin:16px auto 40px;
+      padding:0 16px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:16px;
+      align-items:start;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      max-width:520px;
+      margin:0 auto;
+      width:100%;
+    }
+
+    .card-header{
+      padding:14px 14px 10px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .card-header h1{
+      margin:0;
+      font-size:16px;
+    }
+    .hint{
+      margin:0;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .card-body{ padding:14px; }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      margin-bottom:10px;
+    }
+    label{
+      font-size:12px;
+      color:var(--muted);
+      font-weight:700;
+    }
+    input, select{
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px solid var(--line);
+      outline:none;
+      background:#fff;
+      font-family:var(--font);
+    }
+
+    button{
+      border:1px solid var(--line);
+      background:#f9fafb;
+      padding:10px 12px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:700;
+      color:var(--text);
+      transition: transform .06s ease, border-color .12s ease, background .12s ease;
+      width:100%;
+    }
+    button:hover{
+      transform: translateY(-1px);
+      border-color:#cbd5e1;
+      background:#fff;
+    }
+    .btn-primary{
+      background:var(--accent);
+      color:#fff;
+      border-color:rgba(37,99,235,.35);
+    }
+    .btn-primary:hover{
+      background:#1d4ed8;
+      border-color:rgba(37,99,235,.55);
+    }
+
+    pre{
+      margin:10px 0 0;
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px dashed #d1d5db;
+      background:#fafafa;
+      color:#0f172a;
+      white-space: pre-wrap;
+      overflow:auto;
+      min-height:42px;
+    }
+
+    .row{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+      margin-top:10px;
+    }
+    .link{
+      background:transparent;
+      border:none;
+      color:var(--accent);
+      cursor:pointer;
+      padding:0;
+      font-weight:800;
+      width:auto;
+    }
+    .link:hover{ text-decoration:underline; transform:none; }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="logo">
+        <img src="secura.jpeg" alt="Secura" class="logo-img">
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h1>Register</h1>
+          <p class="hint">Create a new account</p>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="field">
+          <label>Username:</label>
+          <input id="username" type="text" />
+        </div>
+
+        <div class="field">
+          <label>Password:</label>
+          <input id="password" type="password" />
+        </div>
+
+        <div class="field">
+          <label>Role:</label>
+          <select id="role">
+            <option value="employee">employee</option>
+            <option value="viewer">viewer</option>
+            <option value="admin">admin</option>
+          </select>
+        </div>
+
+        <button id="registerBtn" class="btn-primary">Register</button>
+        <div id="registerMsg" style="margin-top:10px; text-align:center; font-weight:700;"></div>
+
+        <div class="row">
+          <button class="link" id="backToHomeBtn" type="button">Back to home</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="register.js"></script>
+  <script>
+    document.getElementById("backToHomeBtn").addEventListener("click", () => {
+      window.location.href = "web.html";
+    });
+  </script>
+</body>
+</html>

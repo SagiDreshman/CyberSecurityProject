@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Panel</title>
+
+  <style>
+    :root{
+      --bg:#f5f6f7; --card:#fff; --text:#111827; --muted:#6b7280;
+      --line:#e5e7eb; --accent:#2563eb; --shadow:0 8px 22px rgba(17,24,39,.08);
+      --radius:12px; --font: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text)}
+    .topbar{background:var(--card);border-bottom:1px solid var(--line)}
+    .topbar-inner{max-width:1100px;margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .title{display:flex;align-items:center;gap:10px}
+    .logo-img {
+  height: 70px;      
+  width: auto;
+  display: block;
+}
+    .title h1{margin:0;font-size:16px}
+    .title p{margin:0;color:var(--muted);font-size:12px}
+    .actions{display:flex;gap:10px;align-items:center}
+    button{border:1px solid var(--line);background:#f9fafb;padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:800}
+    button.primary{background:var(--accent);color:#fff;border-color:rgba(37,99,235,.35)}
+    button.danger{border-color:#fecaca;background:#fff1f2}
+    .wrap{max-width:1100px;margin:16px auto;padding:0 16px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .card-header{padding:14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+    .card-header h2{margin:0;font-size:16px}
+    .hint{margin:0;color:var(--muted);font-size:12px}
+    .card-body{padding:14px}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    .field{display:flex;flex-direction:column;gap:6px;min-width:160px;flex:1}
+    label{font-size:12px;color:var(--muted);font-weight:800}
+    input,select{padding:10px 12px;border:1px solid var(--line);border-radius:10px;outline:none;background:#fff}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:13px;vertical-align:top}
+    th{color:var(--muted);font-size:12px}
+    .right{text-align:right}
+    .small{padding:7px 10px;border-radius:10px;font-size:12px}
+    .pill{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:#fafafa;font-weight:800;font-size:12px}
+    @media (max-width: 980px){ .grid{grid-template-columns:1fr} }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="title">
+        <img src="secura_logo.jpeg" alt="Secura logo" class="logo-img">
+         <div>
+          <h1>Admin Panel</h1>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="BackBtn">Back</button>
+        <button id="LogoutBtn" class="danger">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="grid">
+      
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2>Users</h2>
+            <p class="hint">Create + Delete</p>
+          </div>
+          <button id="RefreshUsers" class="small">Refresh</button>
+        </div>
+
+        <div class="card-body">
+          <div class="row">
+            <div class="field">
+              <label>Username</label>
+              <input id="newUsername" placeholder="username" />
+            </div>
+            <div class="field">
+              <label>Password</label>
+              <input id="newPassword" type="password" placeholder="password" />
+            </div>
+            <div class="field">
+              <label>Role</label>
+              <select id="newRole">
+                <option value="employee">employee</option>
+                <option value="viewer">viewer</option>
+                <option value="admin">admin</option>
+              </select>
+            </div>
+            <div class="field" style="flex:0 0 auto; align-self:end;">
+              <button id="CreateUserBtn" class="primary">Create</button>
+            </div>
+
+          </div>
+
+          <div style="overflow:auto;margin-top:12px">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Username</th>
+                  <th>Role</th>
+                  <th class="right">Action</th>
+                </tr>
+              </thead>
+              <tbody id="usersTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+<div class="card">
+  <div class="card-header">
+    <div>
+      <h2>Equipment</h2>
+      <p>Create + Delete + Update quantity</p>
+    </div>
+    <button id="equipRefreshBtn" class="small">Refresh</button>
+  </div>
+
+  <div class="form-row">
+    <input id="newEquipName" type="text" placeholder="name" />
+    <input id="newEquipQty" type="number" min="0" placeholder="quantity" />
+    <input id="newEquipPrice" type="number" min="0" placeholder="price" />
+    <button id="equipCreateBtn" class="btn primary">Create</button>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>SKU</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th class="right">Action</th>
+      </tr>
+    </thead>
+
+    <tbody id="equipTbody">
+    </tbody>
+  </table>
+</div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2>Orders</h2>
+            <p class="hint">View + Update status</p>
+          </div>
+          <button id="RefreshOrders" class="small">Refresh</button>
+        </div>
+
+        <div class="card-body">
+          <div style="overflow:auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>Order</th>
+                  <th>User</th>
+                  <th>Items</th>
+                  <th>Status</th>
+                  <th class="right">Update</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <p id="msg" class="hint"
+      style="margin:16px 0 0; font-weight:700; color:green;">
+    </p>
+  </div>
+
+  
+  <script src="admin.js"></script>
+</body>
+</html>
